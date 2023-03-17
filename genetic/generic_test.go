@@ -87,6 +87,84 @@ func TestGenericStrategy_Highest(t *testing.T) {
 		want []Organism
 	}{
 		{
+			name: "Simple 1 Highest",
+			args: args{
+				population: []Organism{
+					{
+						Fitness: 1,
+					},
+					{
+						Fitness: 2,
+					},
+					{
+						Fitness: 2,
+					},
+					{
+						Fitness: 4,
+					},
+				},
+				number: 1,
+			},
+			want: []Organism{
+				{
+					Fitness: 4,
+				},
+			},
+		},
+		{
+			name: "1 Highest first",
+			args: args{
+				population: []Organism{
+					{
+						Fitness: 5,
+					},
+					{
+						Fitness: 2,
+					},
+					{
+						Fitness: 2,
+					},
+					{
+						Fitness: 4,
+					},
+				},
+				number: 1,
+			},
+			want: []Organism{
+				{
+					Fitness: 5,
+				},
+			},
+		},
+		{
+			name: "2 Highest bookends",
+			args: args{
+				population: []Organism{
+					{
+						Fitness: 5,
+					},
+					{
+						Fitness: 2,
+					},
+					{
+						Fitness: 2,
+					},
+					{
+						Fitness: 4,
+					},
+				},
+				number: 2,
+			},
+			want: []Organism{
+				{
+					Fitness: 5,
+				},
+				{
+					Fitness: 4,
+				},
+			},
+		},
+		{
 			name: "Just 1 Highest",
 			args: args{
 				population: []Organism{
