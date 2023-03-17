@@ -1,8 +1,6 @@
 package main
 
 import (
-	"bytes"
-	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,15 +8,7 @@ import (
 	"gitlab.com/chadgh/genetic/queens"
 )
 
-func captureOutput(f func()) string {
-	var buf bytes.Buffer
-	log.SetOutput(&buf)
-	f()
-	return buf.String()
-}
-
 func Test_queens(t *testing.T) {
-	// rand.Seed(time.Now().UTC().UnixNano())
 	strategy := genetic.NewGenericStrategy(
 		8,    // organism size
 		100,  // population size
@@ -31,10 +21,5 @@ func Test_queens(t *testing.T) {
 	)
 
 	winner, _ := strategy.Evolve()
-	// output := captureOutput(func() { queens.Run() })
-	// fitness, err := strconv.Atoi(strings.Trim(strings.Split(strings.Split(output, "\n")[1], ":")[3], " "))
-	// assert.Equal(t, nil, err, "no fitness")
-	// assert.Equal(t, 16, fitness, "They don't match.")
-	// assert.Fail(t, output)
 	assert.Equal(t, 16.0, winner.Fitness)
 }

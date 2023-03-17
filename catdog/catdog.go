@@ -15,7 +15,7 @@ func Run() {
 		1000,
 		0.5,
 		[]byte{},
-		fitness,
+		func(o genetic.Organism) float64 { return 1.0 },
 	)
 	winner, _ := strategy.Evolve()
 	fmt.Println(winner)

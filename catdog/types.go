@@ -6,7 +6,7 @@ import (
 	"gitlab.com/chadgh/genetic/genetic"
 )
 
-type   struct {
+type Project struct {
 	name    string
 	cost    float64
 	benefit float64
