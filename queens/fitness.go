@@ -3,10 +3,10 @@ package queens
 import (
 	"math"
 
-	"gitlab.com/chadgh/genetic/genetic"
+	"gitlab.com/chadgh/genetic/genetic/types"
 )
 
-func Fitness(organism genetic.Organism) float64 {
+func Fitness(organism types.Organism) float64 {
 	files := map[int]bool{}
 	ranks := organism.DNA
 	for q := range ranks {

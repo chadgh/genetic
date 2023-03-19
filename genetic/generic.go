@@ -5,6 +5,8 @@ import (
 	"log"
 	"math/rand"
 	"time"
+
+	"gitlab.com/chadgh/genetic/genetic/types"
 )
 
 func init() {
@@ -19,7 +21,7 @@ type GenericStrategy struct {
 	generationLimit    int
 	mutationRate       float64
 	alphabet           []byte
-	fitnessFunc        FitnessFunc
+	fitnessFunc        types.FitnessFunc
 }
 
 func NewGenericStrategy(
@@ -30,7 +32,7 @@ func NewGenericStrategy(
 	generationLimit int,
 	mutationRate float64,
 	alphabet []byte,
-	fitnessFunc FitnessFunc,
+	fitnessFunc types.FitnessFunc,
 ) GenericStrategy {
 	return GenericStrategy{
 		organismSize:       organismSize,
@@ -52,26 +54,26 @@ func (g *GenericStrategy) FitnessTarget() float64 {
 	return g.fitnessTarget
 }
 
-func (g *GenericStrategy) NewRandomOrganism(size int) Organism {
+func (g *GenericStrategy) NewRandomOrganism(size int) types.Organism {
 	dna := make([]byte, size)
 	for i := range dna {
 		dna[i] = byte(g.alphabet[rand.Intn(len(g.alphabet))])
 	}
-	o := Organism{DNA: dna}
+	o := types.Organism{DNA: dna}
 	o.Fitness = g.fitnessFunc(o)
 	return o
 }
 
-func (g *GenericStrategy) Populate() Population {
-	population := NewPopulation(g.populationSize)
+func (g *GenericStrategy) Populate() types.Population {
+	population := types.NewPopulation(g.populationSize)
 	for i := 0; i < g.populationSize; i++ {
 		population[i] = g.NewRandomOrganism(g.organismSize)
 	}
 	return population
 }
 
-func (g *GenericStrategy) Select(population Population, number int) Population {
-	selection := NewPopulation(number)
+func (g *GenericStrategy) Select(population types.Population, number int) types.Population {
+	selection := types.NewPopulation(number)
 	for i := 0; i < number; i++ {
 		val := rand.Float64()
 		if val <= g.selectionThreshold {
@@ -84,21 +86,21 @@ func (g *GenericStrategy) Select(population Population, number int) Population {
 	return selection
 }
 
-func (g *GenericStrategy) Reproduce(o1, o2 Organism) Organism {
+func (g *GenericStrategy) Reproduce(o1, o2 types.Organism) types.Organism {
 	if len(o1.DNA) != len(o2.DNA) || len(o1.DNA) != g.organismSize {
 		log.Println(fmt.Sprintf("ERROR: Reproduce random child, bad Organisms: o1 len: %v, o2 len: %v, expected: %v", len(o1.DNA), len(o2.DNA), g.organismSize))
 		return g.NewRandomOrganism(g.organismSize)
 	}
 
 	c := rand.Intn(g.organismSize)
-	child := Organism{}
+	child := types.Organism{}
 	child.DNA = append(child.DNA, o1.DNA[:c]...)
 	child.DNA = append(child.DNA, o2.DNA[c:]...)
 
 	return child
 }
 
-func (g *GenericStrategy) Mutate(o Organism) Organism {
+func (g *GenericStrategy) Mutate(o types.Organism) types.Organism {
 	if rand.Float64() <= g.mutationRate {
 		mutationIndex := rand.Intn(len(o.DNA))
 		// currentValueIndex := bytes.IndexByte(g.alphabet, o.DNA[mutationIndex])
@@ -131,13 +133,13 @@ func (g *GenericStrategy) Mutate(o Organism) Organism {
 	return o
 }
 
-func (g *GenericStrategy) CalcFitness(population Population) {
+func (g *GenericStrategy) CalcFitness(population types.Population) {
 	for p := range population {
 		population[p].Fitness = g.fitnessFunc(population[p])
 	}
 }
 
-func (g *GenericStrategy) SelectWithProbability(candidates Population) Population {
+func (g *GenericStrategy) SelectWithProbability(candidates types.Population) types.Population {
 	size := len(candidates) - 2
 	probabilities := make([]float64, len(candidates))
 	cdf := make([]float64, len(candidates))
@@ -153,7 +155,7 @@ func (g *GenericStrategy) SelectWithProbability(candidates Population) Populatio
 		cdf[i] = cdf[i-1] + probabilities[i]
 	}
 
-	selected := NewPopulation(size)
+	selected := types.NewPopulation(size)
 	for i := 0; i < size; i++ {
 		r := rand.Float64()
 		bucket := 0
@@ -170,16 +172,16 @@ func (g *GenericStrategy) SelectWithProbability(candidates Population) Populatio
 	return selected
 }
 
-func (g *GenericStrategy) Evolve() (Organism, int) {
+func (g *GenericStrategy) Evolve() (types.Organism, int) {
 	found := false
 	generation := 0
-	var bestFitOrganism Organism
+	var bestFitOrganism types.Organism
 	population := g.Populate()
 	g.CalcFitness(population)
 	for !found {
 		generation++
 		// generate new population candidates
-		newPopulationCandidates := NewPopulation(len(population))
+		newPopulationCandidates := types.NewPopulation(len(population))
 		for i := 0; i < len(population); i++ {
 			parents := g.Select(population, 2)
 			child := g.Reproduce(parents[0], parents[1])
@@ -188,7 +190,7 @@ func (g *GenericStrategy) Evolve() (Organism, int) {
 		}
 		// create new population
 		g.CalcFitness(newPopulationCandidates)
-		var newPopulation Population
+		var newPopulation types.Population
 		highest := g.Highest(population, 2)
 		newPopulation = append(newPopulation, highest...)
 		newPopulation = append(newPopulation, g.SelectWithProbability(newPopulationCandidates)...)
@@ -216,8 +218,8 @@ func (g *GenericStrategy) Evolve() (Organism, int) {
 	return bestFitOrganism, generation
 }
 
-func (g *GenericStrategy) Highest(population Population, number int) Population {
-	highest := NewPopulation(number)
+func (g *GenericStrategy) Highest(population types.Population, number int) types.Population {
+	highest := types.NewPopulation(number)
 	for h := range highest {
 		highestIndex := 0
 		highest[h] = population[highestIndex]

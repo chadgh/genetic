@@ -3,12 +3,12 @@ package queens
 import (
 	"testing"
 
-	"gitlab.com/chadgh/genetic/genetic"
+	"gitlab.com/chadgh/genetic/genetic/types"
 )
 
 func TestFitness(t *testing.T) {
 	type args struct {
-		organism genetic.Organism
+		organism types.Organism
 	}
 	tests := []struct {
 		name string
@@ -18,7 +18,7 @@ func TestFitness(t *testing.T) {
 		{
 			name: "same rank",
 			args: args{
-				genetic.Organism{
+				types.Organism{
 					DNA: []byte{
 						byte(0),
 						byte(0),
@@ -36,7 +36,7 @@ func TestFitness(t *testing.T) {
 		{
 			name: "different rank, still bad",
 			args: args{
-				genetic.Organism{
+				types.Organism{
 					DNA: []byte{
 						byte(0),
 						byte(1),
@@ -54,7 +54,7 @@ func TestFitness(t *testing.T) {
 		{
 			name: "actual solution #1",
 			args: args{
-				genetic.Organism{
+				types.Organism{
 					DNA: []byte{
 						byte(1),
 						byte(3),
@@ -72,7 +72,7 @@ func TestFitness(t *testing.T) {
 		{
 			name: "actual solution #2",
 			args: args{
-				genetic.Organism{
+				types.Organism{
 					DNA: []byte{
 						byte(0),
 						byte(6),

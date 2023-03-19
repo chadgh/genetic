@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"gitlab.com/chadgh/genetic/eightqueens"
 	"gitlab.com/chadgh/genetic/queens"
 	// "gitlab.com/chadgh/genetic/catdog"
 	// "gitlab.com/chadgh/genetic/napsack"
@@ -26,6 +27,8 @@ func main() {
 	// 	napsack.Run()
 	case "queens":
 		queens.Run()
+	case "8":
+		eightqueens.Run()
 	default:
 		fmt.Println("Doing nothing")
 	}
