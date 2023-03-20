@@ -3,7 +3,7 @@ package queens
 import (
 	"testing"
 
-	"gitlab.com/chadgh/genetic/genetic/types"
+	"github.com/chadgh/genetic/genetic/types"
 )
 
 func TestFitness(t *testing.T) {

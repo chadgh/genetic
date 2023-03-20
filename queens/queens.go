@@ -3,9 +3,9 @@ package queens
 import (
 	"log"
 
-	"gitlab.com/chadgh/genetic/genetic"
-	"gitlab.com/chadgh/genetic/genetic/strategies"
-	genetictypes "gitlab.com/chadgh/genetic/genetic/types"
+	"github.com/chadgh/genetic/genetic"
+	"github.com/chadgh/genetic/genetic/strategies"
+	genetictypes "github.com/chadgh/genetic/genetic/types"
 )
 
 func Run() {

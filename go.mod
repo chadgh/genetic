@@ -1,4 +1,4 @@
-module gitlab.com/chadgh/genetic
+module github.com/chadgh/genetic
 
 go 1.18
 

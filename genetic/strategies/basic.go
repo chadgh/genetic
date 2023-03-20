@@ -3,7 +3,7 @@ package strategies
 import (
 	"math/rand"
 
-	"gitlab.com/chadgh/genetic/genetic/types"
+	"github.com/chadgh/genetic/genetic/types"
 )
 
 type BasicStrategy struct {

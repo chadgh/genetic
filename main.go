@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"gitlab.com/chadgh/genetic/catdog"
-	"gitlab.com/chadgh/genetic/eightqueens"
-	"gitlab.com/chadgh/genetic/queens"
+	"github.com/chadgh/genetic/catdog"
+	"github.com/chadgh/genetic/eightqueens"
+	"github.com/chadgh/genetic/queens"
 )
 
 func main() {

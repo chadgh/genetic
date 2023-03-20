@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"gitlab.com/chadgh/genetic/genetic/types"
+	"github.com/chadgh/genetic/genetic/types"
 )
 
 func TestBasicStrategy_Mutate(t *testing.T) {

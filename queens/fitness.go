@@ -3,7 +3,7 @@ package queens
 import (
 	"math"
 
-	"gitlab.com/chadgh/genetic/genetic/types"
+	"github.com/chadgh/genetic/genetic/types"
 )
 
 func Fitness(organism types.Organism) float64 {

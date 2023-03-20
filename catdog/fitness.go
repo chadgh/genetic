@@ -1,7 +1,7 @@
 package catdog
 
 import (
-	"gitlab.com/chadgh/genetic/genetic/types"
+	"github.com/chadgh/genetic/genetic/types"
 )
 
 type Costs struct {
