@@ -14,3 +14,14 @@ func NewAlphabet[A Alphabetic](items []A) Alphabet {
 	}
 	return alphabet
 }
+
+func NewIntAlphabet(min, max int) Alphabet {
+	size := max - min + 1
+	alphabet := make([]byte, size)
+	index := 0
+	for value := min; value <= max; value++ {
+		alphabet[index] = byte(value)
+		index++
+	}
+	return Alphabet(alphabet)
+}

@@ -21,7 +21,7 @@ func RunGenerations(
 
 	for {
 		for i := range population {
-			if strategy.Fitness(population[i]) == maxFitness {
+			if strategy.Fitness(population[i]) >= maxFitness {
 				found = &population[i]
 				break
 			}
@@ -34,6 +34,11 @@ func RunGenerations(
 		if maxGenerations != 0 && generation == maxGenerations {
 			break
 		}
+	}
+
+	if found == nil {
+		population.Sort()
+		found = &population[0]
 	}
 	return *found, generation
 }
@@ -52,7 +57,7 @@ func EvolveBasic(population types.Population, strategy types.Strategy) types.Pop
 		child = strategy.Mutate(child)
 		newPopulation[i] = child
 		child.Fitness = strategy.Fitness(child)
-		if child.Fitness == strategy.MaxFitness() {
+		if child.Fitness >= strategy.MaxFitness() {
 			break
 		}
 	}

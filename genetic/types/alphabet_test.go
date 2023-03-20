@@ -28,3 +28,38 @@ func TestNewAlphabet(t *testing.T) {
 		}
 	})
 }
+
+func TestNewIntAlphabet(t *testing.T) {
+	type args struct {
+		min int
+		max int
+	}
+	tests := []struct {
+		name string
+		args args
+		want Alphabet
+	}{
+		{
+			name: "only 0, 1",
+			args: args{min: 0, max: 1},
+			want: Alphabet([]byte{0, 1}),
+		},
+		{
+			name: "0, 10",
+			args: args{min: 0, max: 10},
+			want: Alphabet([]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}),
+		},
+		{
+			name: "1, 10",
+			args: args{min: 1, max: 10},
+			want: Alphabet([]byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewIntAlphabet(tt.args.min, tt.args.max); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewIntAlphabet() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

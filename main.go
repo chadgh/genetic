@@ -4,10 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	"gitlab.com/chadgh/genetic/catdog"
 	"gitlab.com/chadgh/genetic/eightqueens"
 	"gitlab.com/chadgh/genetic/queens"
-	// "gitlab.com/chadgh/genetic/catdog"
-	// "gitlab.com/chadgh/genetic/napsack"
 )
 
 func main() {
@@ -19,12 +18,8 @@ func main() {
 	toRun := args[1]
 
 	switch toRun {
-	// case "projectestimation":
-	//	projectestimation.Run()
-	// case "catdog":
-	// 	catdog.Run()
-	// case "napsack":
-	// 	napsack.Run()
+	case "catdog":
+		catdog.Run()
 	case "queens":
 		queens.Run()
 	case "8":
