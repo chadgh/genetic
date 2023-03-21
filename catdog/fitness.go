@@ -8,6 +8,8 @@ type Costs struct {
 	initialCatCost float64
 	initialDogCost float64
 	initialAmount  float64
+	catCost        float64
+	dogCost        float64
 	catSqft        int
 	dogSqft        int
 	maxSqft        int
@@ -20,15 +22,18 @@ type Costs struct {
 }
 
 var scenario = Costs{
-	30.0,   // initialCatCost float64
+	32.0,   // initialCatCost float64
 	80.0,   // initialDogCost float64
 	1280.0, // initialAmount float64
-	8,      // catSqft int
+	// 1296.0, // initialAmount float64
+	2.0,    // catCost float64
+	5.0,    // catCost float64
+	6,      // catSqft int
 	24,     // dogSqft int
 	360,    // maxSqft int
-	16,     // catTime int
-	20,     // dogTime int
-	480,    // maxTime int
+	28,     // catTime int - 12 feeding + 16 pamper
+	40,     // dogTime int - 20 feeding + 20 pamper
+	960,    // maxTime int
 	8.0,    // catPay float64
 	20.0,   // dogPay float64
 	1000.0, // maxPay float64
@@ -62,5 +67,7 @@ func TotalTimeNeeded(cats, dogs int) int {
 }
 
 func TotalEarnings(cats, dogs int) float64 {
-	return (float64(cats) * scenario.catPay) + (float64(dogs) * scenario.dogPay)
+	revenue := (float64(cats) * scenario.catPay) + (float64(dogs) * scenario.dogPay)
+	cost := (float64(cats) * scenario.catCost) + (float64(dogs) * scenario.dogCost)
+	return revenue - cost
 }

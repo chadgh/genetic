@@ -12,8 +12,8 @@ func Run() {
 	alphabet := genetictypes.NewIntAlphabet(0, 42)
 	strategy := strategies.NewBasicStrategy(
 		alphabet,
-		321.0,
-		10000,
+		240.0,
+		100000,
 		0.05,
 		Fitness,
 	)
@@ -33,5 +33,6 @@ func Run() {
 	log.Println("sqft used: ", TotalSqftUsed(cats, dogs), " sqft")
 	timeNeeded := TotalTimeNeeded(cats, dogs)
 	log.Println("time needed: ", timeNeeded, " min OR ", timeNeeded/60, " hours ", timeNeeded%60, " min")
-	log.Println("weekly earnings: $", TotalEarnings(cats, dogs))
+	earnings := TotalEarnings(cats, dogs)
+	log.Println("daily earnings: $", earnings)
 }
