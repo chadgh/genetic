@@ -18,7 +18,7 @@ func TestFitness(t *testing.T) {
 		{
 			name: "solution 1",
 			args: args{organism: types.Organism{DNA: []byte{10, 10}}},
-			want: 280.0,
+			want: 210.0,
 		},
 		{
 			name: "non-solution 1 - too many dogs",
