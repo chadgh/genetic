@@ -4,7 +4,7 @@ A basic genetic algorithm solution in golang.
 
 There are two reference implementations. The 8-queens problem and a business earnings problem (catdog).
 
-The eightqueens director is not used but was used as a starting point to creating the general solution.
+The eightqueens direct implementation is not used but was used as a starting point to creating the general solution.
 
 
 ## Usage
