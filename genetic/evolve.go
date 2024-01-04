@@ -21,7 +21,8 @@ func RunGenerations(
 
 	for {
 		for i := range population {
-			if strategy.Fitness(population[i]) >= maxFitness {
+			population[i].Fitness = strategy.Fitness(population[i])
+			if population[i].Fitness >= maxFitness {
 				found = &population[i]
 				break
 			}
